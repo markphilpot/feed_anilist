@@ -1,0 +1,64 @@
+{
+  "name": "feed_anilist",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.6.6",
+    "@netlify/functions": "^1.0.0",
+    "node-fetch": "^3.2.6",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.4.2",
+    "web-vitals": "^2.1.0",
+    "graphql": "^15.5.3",
+    "rss": "^1.2.2"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@types/rss": "^0.0.29",
+    "apollo": "^2.33.10",
+    "prettier": "^2.6.2",
+    "react-scripts": "5.0.1"
+  },
+  "resolutions": {
+    "graphql": "^15.5.3"
+  },
+  "scripts": {
+    "dev": "netlify dev",
+    "start": "BROWSER=\"google chrome\" react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "yarn lint:tsc && yarn lint:es",
+    "lint:es": "eslint .",
+    "lint:tsc": "tsc --noemit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "update-schema": "curl -i -X POST https://graphql.anilist.co -H \"Content-Type: application/graphql\" -d @src/assets/introspection.graphql",
+    "g2ts": "apollo codegen:generate --localSchemaFile=\"./assets/schema.json\" --target=typescript --tsFileExtension=d.ts --tagName=gql --outputFlat src/graphql/types && cp src/graphql/types/globalTypes.d.ts src/graphql/types/globalTypes.ts"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

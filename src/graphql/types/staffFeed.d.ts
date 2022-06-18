@@ -42,6 +42,7 @@ export interface staffFeed_Staff_staffMedia_edges_node {
 export interface staffFeed_Staff_staffMedia_edges {
   __typename: "MediaEdge";
   node: staffFeed_Staff_staffMedia_edges_node | null;
+  staffRole: string | null;
 }
 
 export interface staffFeed_Staff_staffMedia {

@@ -6,16 +6,14 @@ import { studioSearchQuery } from '../graphql/search';
 import StudioCard from './StudioCard';
 import { studioSearch, studioSearch_Page_studios, studioSearchVariables } from '../graphql/types/studioSearch';
 
-type Props = {};
-
-const StudioSearchBlock = (props: Props) => {
+const StudioSearchBlock = () => {
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
   const { data, loading } = useQuery<studioSearch, studioSearchVariables>(studioSearchQuery, {
     variables: {
       query: searchValue,
-      perPage: 4,
+      perPage: 5,
     },
     skip: searchValue.length === 0,
   });
@@ -49,12 +47,12 @@ const StudioSearchBlock = (props: Props) => {
       <SearchInput className={'my-4'} value={inputValue} onChange={handleChange} placeholder={'Find anime studios'} />
       <div className={'flex w-full flex-row items-center justify-center'}>
         {results.map((studio) => (
-          <StudioCard className={'basis-1/4'} key={studio.id} id={studio.id} name={studio.name} />
+          <StudioCard className={'basis-1/5'} key={studio.id} id={studio.id} name={studio.name} />
         ))}
         {showPlaceholder && (
           <>
-            <StudioCard className={'basis-1/4'} id={43} name={'ufotable'} />
-            <StudioCard className={'basis-1/4'} id={2} name={'Kyoto Animation'} />
+            <StudioCard className={'basis-1/5'} id={43} name={'ufotable'} />
+            <StudioCard className={'basis-1/5'} id={2} name={'Kyoto Animation'} />
           </>
         )}
         {noResults && <div>No Studios found</div>}

@@ -51,6 +51,7 @@ export const staffFeedQuery = gql`
             description
             updatedAt
           }
+          staffRole
         }
       }
     }

@@ -25,7 +25,12 @@ const StudioCard = (props: Props) => {
 
   return (
     <CopyToClipboard text={window.origin + `/.netlify/functions/studio?id=${id}`} onCopy={handleOnCopy}>
-      <div className={classNames('m-4 cursor-pointer rounded-md border p-2', className)}>
+      <div
+        className={classNames(
+          'm-4 cursor-pointer rounded-md border bg-white p-2 shadow-md hover:bg-slate-100',
+          className
+        )}
+      >
         <img src={`/.netlify/functions/studioLogo?id=${id}`} alt={name} />
         {/*<p>{name}</p>*/}
       </div>

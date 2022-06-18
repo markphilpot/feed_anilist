@@ -66,7 +66,7 @@ const handler: Handler = async (event, context) => {
           media.description
         }`,
         url: media.siteUrl ?? '',
-        date: new Date(media.updatedAt ?? 0),
+        date: new Date((media.updatedAt ?? 0) * 1000),
       });
     });
 

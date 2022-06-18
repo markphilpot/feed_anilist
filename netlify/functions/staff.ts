@@ -61,11 +61,11 @@ const handler: Handler = async (event, context) => {
 
       feed.item({
         title: media.title?.userPreferred ?? '',
-        description: `<img src="${media.coverImage?.large}" alt="${media.title?.userPreferred ?? ''}"/> ${
-          media.description
-        }`,
+        description: `<img src="${media.coverImage?.large}" alt="${media.title?.userPreferred ?? ''}"/> Role: ${
+          edge.staffRole
+        } ${media.description}`,
         url: media.siteUrl ?? '',
-        date: new Date(media.updatedAt ?? 0),
+        date: new Date((media.updatedAt ?? 0) * 1000),
       });
     });
 

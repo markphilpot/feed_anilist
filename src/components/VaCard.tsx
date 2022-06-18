@@ -1,15 +1,15 @@
 import React, { useCallback, useMemo } from 'react';
-import { staffSearch_Page_staff, staffSearch_Page_staff_staffMedia_edges } from '../graphql/types/staffSearch';
 import classNames from 'classnames';
 import { toast } from 'react-toastify';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { vaSearch_Page_staff, vaSearch_Page_staff_characters_edges } from '../graphql/types/vaSearch';
 
 type Props = {
-  staff: staffSearch_Page_staff;
+  staff: vaSearch_Page_staff;
   className?: string;
 };
 
-const StaffCard = (props: Props) => {
+const VaCard = (props: Props) => {
   const { staff, className } = props;
 
   const handleOnCopy = useCallback(() => {
@@ -24,15 +24,15 @@ const StaffCard = (props: Props) => {
   }, []);
 
   const popularMedia = useMemo(() => {
-    return staff.staffMedia?.edges
-      ?.filter((e): e is staffSearch_Page_staff_staffMedia_edges => !!e)
+    return staff.characters?.edges
+      ?.filter((e): e is vaSearch_Page_staff_characters_edges => !!e)
       .map((edge) => {
         return (
           <div className={'basis-1/3'} key={edge.node?.id}>
             <img
               className={'h-full object-cover'}
-              src={edge.node?.coverImage?.large ?? ''}
-              alt={edge.node?.title?.userPreferred ?? ''}
+              src={edge.node?.image?.large ?? ''}
+              alt={edge.node?.name?.userPreferred ?? ''}
             />
           </div>
         );
@@ -51,7 +51,6 @@ const StaffCard = (props: Props) => {
           <img src={staff.image?.large ?? ''} alt={staff.name?.userPreferred ?? ''} />
           <div className={'absolute bottom-0 bg-slate-50 bg-opacity-50 p-1'}>
             <p className={'text-sm'}>{staff.name?.userPreferred}</p>
-            <p className={'text-xs'}>{staff.primaryOccupations?.join(', ')}</p>
           </div>
         </div>
         <div className={'flex flex-row'}>{popularMedia}</div>
@@ -60,4 +59,4 @@ const StaffCard = (props: Props) => {
   );
 };
 
-export default StaffCard;
+export default VaCard;

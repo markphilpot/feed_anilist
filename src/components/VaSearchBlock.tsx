@@ -2,15 +2,15 @@ import React, { ChangeEvent, useCallback, useMemo, useState } from 'react';
 import SearchInput from './SearchInput';
 import { useQuery } from '@apollo/client';
 import debounce from 'lodash/debounce';
-import { staffSearchQuery } from '../graphql/search';
-import { staffSearch, staffSearch_Page_staff, staffSearchVariables } from '../graphql/types/staffSearch';
-import StaffCard from './StaffCard';
+import { vaSearchQuery } from '../graphql/search';
+import { vaSearch, vaSearch_Page_staff, vaSearchVariables } from '../graphql/types/vaSearch';
+import VaCard from './VaCard';
 
-const StaffSearchBlock = () => {
+const VaSearchBlock = () => {
   const [searchValue, setSearchValue] = useState('');
   const [inputValue, setInputValue] = useState('');
 
-  const { data } = useQuery<staffSearch, staffSearchVariables>(staffSearchQuery, {
+  const { data } = useQuery<vaSearch, vaSearchVariables>(vaSearchQuery, {
     variables: {
       query: searchValue,
       perPage: 5,
@@ -36,7 +36,7 @@ const StaffSearchBlock = () => {
   );
 
   const rows = useMemo(() => {
-    return data?.Page?.staff?.filter((x): x is staffSearch_Page_staff => !!x) ?? [];
+    return data?.Page?.staff?.filter((x): x is vaSearch_Page_staff => !!x) ?? [];
   }, [data]);
 
   return (
@@ -45,15 +45,15 @@ const StaffSearchBlock = () => {
         className={'my-4'}
         value={inputValue}
         onChange={handleChange}
-        placeholder={'Find anime and manga staff'}
+        placeholder={'Find anime voice actors'}
       />
       <div className={'flex w-full flex-row items-start justify-center'}>
         {rows.map((staff) => (
-          <StaffCard className={'basis-1/5'} key={staff.id} staff={staff} />
+          <VaCard className={'basis-1/5'} key={staff.id} staff={staff} />
         ))}
       </div>
     </div>
   );
 };
 
-export default StaffSearchBlock;
+export default VaSearchBlock;

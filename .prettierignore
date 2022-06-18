@@ -1,3 +1,5 @@
 *.d.ts
 build/
 client/build/
+assets/*
+.netlify

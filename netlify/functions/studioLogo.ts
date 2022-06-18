@@ -1,5 +1,5 @@
 import { Handler } from '@netlify/functions';
-import {getLogo} from "../logos";
+import { getLogo } from '../logos';
 
 const handler: Handler = async (event, context) => {
   const id = event.queryStringParameters?.id;
@@ -11,20 +11,20 @@ const handler: Handler = async (event, context) => {
     };
   }
 
-  const logo = getLogo(id)
+  const logo = getLogo(id);
 
-  if(logo) {
+  if (logo) {
     return {
       statusCode: 302,
       headers: {
         Location: logo,
       },
-    }
+    };
   }
 
   return {
-    statusCode: 404
-  }
-}
+    statusCode: 404,
+  };
+};
 
 export { handler };

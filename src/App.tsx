@@ -1,19 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+
 import './App.css';
+import Logo from './components/Logo';
+import StudioSearchBlock from './components/StudioSearchBlock';
+import StaffSearchBlock from './components/StaffSearchBlock';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
+    <div className="flex w-full flex-col content-center items-center">
+      <Logo />
+      <div>Subscribe to an RSS feed of your favorite anime studios, staff, and voice actors</div>
+      <StudioSearchBlock />
+      <StaffSearchBlock />
+      <div>Voice Actors</div>
+      <ToastContainer transition={Slide} />
     </div>
   );
 }

@@ -62,7 +62,7 @@ const handler: Handler = async (event, context) => {
 
       feed.item({
         title: media.title?.userPreferred ?? '',
-        description: `<img src="${media.coverImage?.large}" alt="${media.title?.userPreferred ?? ''}"/> ${
+        description: `<img src="${media.coverImage?.large}" alt="${media.title?.userPreferred ?? ''}"/> <br/> ${
           media.description
         }`,
         url: media.siteUrl ?? '',

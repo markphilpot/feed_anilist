@@ -23,7 +23,7 @@ const SearchInput = (props: Props) => {
         </div>
         <input
           id="search"
-          className="block w-full rounded-md border border-transparent bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-indigo-600 sm:text-sm"
+          className="block w-full rounded-md border border-transparent bg-white py-2 pl-10 pr-3 leading-5 text-gray-900 placeholder-gray-500 focus:border-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-violet-600 focus:ring-offset-2 sm:text-sm"
           placeholder={placeholder}
           type="search"
           name="search"

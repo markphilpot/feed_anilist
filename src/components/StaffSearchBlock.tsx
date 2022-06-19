@@ -47,7 +47,7 @@ const StaffSearchBlock = () => {
         onChange={handleChange}
         placeholder={'Find anime and manga staff'}
       />
-      <div className={'flex w-full flex-row items-start justify-center'}>
+      <div className={'flex min-h-[100px] w-full flex-row items-start justify-center'}>
         {rows.map((staff) => (
           <StaffCard className={'basis-1/5'} key={staff.id} staff={staff} />
         ))}

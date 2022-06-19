@@ -40,21 +40,14 @@ const StudioSearchBlock = () => {
   }, [data]);
 
   const noResults = results.length === 0 && !loading && searchValue.length > 0;
-  const showPlaceholder = searchValue.length === 0;
 
   return (
     <div className={'my-4 flex w-full flex-col items-center'}>
       <SearchInput className={'my-4'} value={inputValue} onChange={handleChange} placeholder={'Find anime studios'} />
-      <div className={'flex w-full flex-row items-center justify-center'}>
+      <div className={'flex min-h-[100px] w-full flex-row items-center justify-center'}>
         {results.map((studio) => (
           <StudioCard className={'basis-1/5'} key={studio.id} id={studio.id} name={studio.name} />
         ))}
-        {showPlaceholder && (
-          <>
-            <StudioCard className={'basis-1/5'} id={43} name={'ufotable'} />
-            <StudioCard className={'basis-1/5'} id={2} name={'Kyoto Animation'} />
-          </>
-        )}
         {noResults && <div>No Studios found</div>}
       </div>
     </div>

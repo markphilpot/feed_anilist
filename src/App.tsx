@@ -10,9 +10,13 @@ import VaSearchBlock from './components/VaSearchBlock';
 
 function App() {
   return (
-    <div className="flex h-full w-full flex-col content-center items-center bg-white">
-      <Logo />
-      <div>Subscribe to an RSS feed of your favorite anime studios, staff, and voice actors</div>
+    <div className="flex h-full w-full flex-col content-center items-center">
+      <div className={'flex flex-col items-center p-6'}>
+        <Logo className={''} />
+        <p className={'text-sm text-slate-800'}>
+          Subscribe to an RSS feed of your favorite anime studios, staff, and voice actors
+        </p>
+      </div>
       <StudioSearchBlock />
       <StaffSearchBlock />
       <VaSearchBlock />

@@ -1269,6 +1269,16 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/alegreya-sans-sc@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/alegreya-sans-sc/-/alegreya-sans-sc-4.5.8.tgz#fc35a50246a69fe7272cf5a02124330d61a7fd9c"
+  integrity sha512-Y8dCkKaeBkugbVK/uA57+KUZw0Bc7OGh6SS7dcyd8xclusc6WqndpwJjBBJkKkcahzJxaO7h/Q8QFfPBqItEEA==
+
+"@fontsource/lato@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@fontsource/lato/-/lato-4.5.8.tgz#20acb60d0895cc82723b4999492c70b1f9816460"
+  integrity sha512-IoSvhhzHsSzJu5XEOmDqzqcSmtfcJ788nz2TDgGXac076DApUsYIPHHBd0dh9guMBIVuHZ8Y2dlXNHFl4bCyLA==
+
 "@graphql-typed-document-node/core@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@graphql-typed-document-node/core/-/core-3.1.1.tgz#076d78ce99822258cf813ecc1e7fa460fa74d052"

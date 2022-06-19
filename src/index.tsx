@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import '@fontsource/lato';
+import '@fontsource/lato/700.css';
+import '@fontsource/alegreya-sans-sc/300.css';
 import './tailwind.css';
 import './index.css';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloClient, InMemoryCache } from '@apollo/client/core';

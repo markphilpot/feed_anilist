@@ -3,7 +3,13 @@ import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client/core';
 import RSS from 'rss';
 import fetch from 'node-fetch';
 import { staffFeedQuery } from '../../src/graphql/feed';
-import { staffFeed, staffFeed_Staff_staffMedia_edges, staffFeedVariables } from '../../src/graphql/types/staffFeed';
+import {
+  staffFeed,
+  staffFeed_Staff_staffMedia_edges,
+  staffFeed_Staff_staffMedia_edges_node,
+  staffFeedVariables,
+} from '../../src/graphql/types/staffFeed';
+import { mediaGuid, releaseDate } from '../feed';
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -50,6 +56,10 @@ const handler: Handler = async (event, context) => {
     image_url: data?.Staff?.image?.large ?? '',
   });
 
+  // Staff are credited per role, so one title can arrive as several edges (Director, Storyboard,
+  // ...). Collapse them into a single item that lists every role.
+  const byMedia = new Map<number, { media: staffFeed_Staff_staffMedia_edges_node; roles: string[] }>();
+
   (data?.Staff?.staffMedia?.edges ?? [])
     .filter((e): e is staffFeed_Staff_staffMedia_edges => !!e)
     .forEach((edge: staffFeed_Staff_staffMedia_edges) => {
@@ -59,15 +69,28 @@ const handler: Handler = async (event, context) => {
         return;
       }
 
-      feed.item({
-        title: media.title?.userPreferred ?? '',
-        description: `<img src="${media.coverImage?.large}" alt="${media.title?.userPreferred ?? ''}"/> <br/> Role: ${
-          edge.staffRole
-        } <br/> ${media.description}`,
-        url: media.siteUrl ?? '',
-        date: new Date((media.updatedAt ?? 0) * 1000),
-      });
+      const entry = byMedia.get(media.id) ?? { media, roles: [] };
+      const role = edge.staffRole?.trim();
+
+      if (role && !entry.roles.includes(role)) {
+        entry.roles.push(role);
+      }
+
+      byMedia.set(media.id, entry);
     });
+
+  byMedia.forEach(({ media, roles }) => {
+    const title = media.title?.userPreferred ?? '';
+    const credit = roles.length > 0 ? `Role: ${roles.join(', ')} <br/> ` : '';
+
+    feed.item({
+      title,
+      description: `<img src="${media.coverImage?.large}" alt="${title}"/> <br/> ${credit}${media.description}`,
+      url: media.siteUrl ?? '',
+      guid: mediaGuid(media.id),
+      date: releaseDate(media.startDate),
+    });
+  });
 
   const xml = feed.xml();
 

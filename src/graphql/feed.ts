@@ -18,7 +18,11 @@ export const studioFeedQuery = gql`
             }
             siteUrl
             description
-            updatedAt
+            startDate {
+              year
+              month
+              day
+            }
           }
         }
       }
@@ -49,7 +53,11 @@ export const staffFeedQuery = gql`
             }
             siteUrl
             description
-            updatedAt
+            startDate {
+              year
+              month
+              day
+            }
           }
           staffRole
         }

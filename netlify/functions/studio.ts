@@ -5,6 +5,7 @@ import fetch from 'node-fetch';
 import { studioFeedQuery } from '../../src/graphql/feed';
 import { studioFeed, studioFeed_Studio_media_edges, studioFeedVariables } from '../../src/graphql/types/studioFeed';
 import { getLogo } from '../logos';
+import { mediaGuid, releaseDate } from '../feed';
 
 const client = new ApolloClient({
   link: new HttpLink({
@@ -51,14 +52,20 @@ const handler: Handler = async (event, context) => {
     image_url: getLogo(id) || undefined,
   });
 
+  // A studio can be attached to the same media more than once (animation studio and producer),
+  // which yields duplicate edges for one title.
+  const seen = new Set<number>();
+
   (data?.Studio?.media?.edges ?? [])
     .filter((e): e is studioFeed_Studio_media_edges => !!e)
     .forEach((edge: studioFeed_Studio_media_edges) => {
       const media = edge.node;
 
-      if (!media) {
+      if (!media || seen.has(media.id)) {
         return;
       }
+
+      seen.add(media.id);
 
       feed.item({
         title: media.title?.userPreferred ?? '',
@@ -66,7 +73,8 @@ const handler: Handler = async (event, context) => {
           media.description
         }`,
         url: media.siteUrl ?? '',
-        date: new Date((media.updatedAt ?? 0) * 1000),
+        guid: mediaGuid(media.id),
+        date: releaseDate(media.startDate),
       });
     });
 

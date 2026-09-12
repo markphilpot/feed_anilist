@@ -29,6 +29,22 @@ export interface staffFeed_Staff_staffMedia_edges_node_coverImage {
   large: string | null;
 }
 
+export interface staffFeed_Staff_staffMedia_edges_node_startDate {
+  __typename: "FuzzyDate";
+  /**
+   * Numeric Year (2017)
+   */
+  year: number | null;
+  /**
+   * Numeric Month (3)
+   */
+  month: number | null;
+  /**
+   * Numeric Day (24)
+   */
+  day: number | null;
+}
+
 export interface staffFeed_Staff_staffMedia_edges_node {
   __typename: "Media";
   id: number;
@@ -36,7 +52,7 @@ export interface staffFeed_Staff_staffMedia_edges_node {
   coverImage: staffFeed_Staff_staffMedia_edges_node_coverImage | null;
   siteUrl: string | null;
   description: string | null;
-  updatedAt: number | null;
+  startDate: staffFeed_Staff_staffMedia_edges_node_startDate | null;
 }
 
 export interface staffFeed_Staff_staffMedia_edges {
